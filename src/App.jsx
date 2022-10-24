@@ -1,49 +1,44 @@
 import { Form } from './components/Form';
-import { Child } from './components/Child';
-import { Message } from './components/Message';
-import { useState } from 'react';
+import { MessagesList } from './components/MessagesList';
+import { useState, useEffect } from 'react';
+import { AUTHOR } from './components/Author';
 
 import './index.css'
 import './App.css';
 
 export const App = () => {
-  const [name, setName] = useState('Elena')
-  const [count, setCount] = useState(0)
-  const mytext = "Good Morning"
-  const handleChangeName = (ev) => {
-    setName(ev.target.value)
-  }
+  const [messages, setMessages] = useState([]);
+
+  const addMessage = (newMessage) => {
+    setMessages((prevMesages) => [...prevMesages, newMessage]);
+  };
+
+  useEffect(() => {
+    if (
+      messages.length > 0 &&
+      messages[messages.length - 1].author === AUTHOR.user
+    ) {
+      const timeout = setTimeout(() => {
+        addMessage({
+          author: AUTHOR.bot,
+          value: 'Im BOT',
+        });
+      }, 1000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [messages]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        My first React page
-        <p className="App-text" >
-          Hello, <Child name={name}/>
-        </p>
-      <> 
-	    <h3>What is next?</h3>
-      <Message name={mytext}/>
-      </>
-      <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-      </a>
-     
-      <h3>Parent component</h3>
-      <input onChange={handleChangeName} />
-      <hr />
-      <Form />
-      <h3>Child component</h3>
-      <p>{count}</p>
-      <Child name={name} handleChangeCount={setCount} />
-      </header>
-    </div>
+  <div className="App">
+    <header className="App-header">
+      My third React page
+      <MessagesList messages={messages} />
+      <Form addMessage={addMessage} />
+
+    </header>
+  </div>
   );
-}
+};
 
 export default App;
