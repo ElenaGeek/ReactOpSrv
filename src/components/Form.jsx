@@ -1,32 +1,33 @@
-import { useCallback, useState, useRef, useEffect } from 'react';
-import { Child } from './Child';
+import { useState } from 'react';
+import { AUTHOR } from './Author';
+import { Button } from './Button';
 
-export const Form = () => {
-  const [count, setCount] = useState(0);
-  const [visible, setVisible] = useState(true);
-  const buttonEl = useRef(null);
+import style from './Form.module.css'
 
-  const handleChangeCount = useCallback(() => {
-    setCount((prevCount) => prevCount + 1);
-  }, [setCount]);
+export const Form = ({ addMessage }) => {
+  const [value, setValue] = useState('');
+  const name = 'Please input new name';
 
-  useEffect(() => {
-    console.log('ref', buttonEl);
-  }, []);
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    addMessage({
+      author: AUTHOR.user,
+      value,
+    });
+    setValue('');
+  };
 
   return (
-    <>
-      <h4>Parent component</h4>
-      <p>{count}</p>
-      <button ref={buttonEl} onClick={() => setCount(count + 1)}>
-        +1
-      </button>
-      <br />
-      <button onClick={() => setVisible(!visible)}>
-        {visible ? 'hide' : 'visible'}
-      </button>
-      <h5>Child component</h5>
-      {visible && <Child value={0} changeCount={handleChangeCount} />}
-    </>
+    <form onSubmit={handleSubmit} className={style.form}>
+    <p>{name}</p>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+
+      <Button label="send" disabled={!value} />
+    </form>
   );
 };
+
