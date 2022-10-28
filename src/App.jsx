@@ -1,44 +1,48 @@
-import { Form } from './components/Form';
-import { MessagesList } from './components/MessagesList';
-import { useState, useEffect } from 'react';
-import { AUTHOR } from './components/Author';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import Chats from "./pages/Chats";
+import Profile from "./pages/Profile";
+import NoPage from "./pages/NoPage";
 
 import './index.css'
 import './App.css';
 
-export const App = () => {
-  const [messages, setMessages] = useState([]);
-
-  const addMessage = (newMessage) => {
-    setMessages((prevMesages) => [...prevMesages, newMessage]);
+export default function App() {
+  const myStyle = {
+    color: "white",
+    backgroundColor: "DodgerBlue",
+    padding: "10px",
+    fontFamily: "Sans-Serif"
   };
-
-  useEffect(() => {
-    if (
-      messages.length > 0 &&
-      messages[messages.length - 1].author === AUTHOR.user
-    ) {
-      const timeout = setTimeout(() => {
-        addMessage({
-          author: AUTHOR.bot,
-          value: 'Im BOT',
-        });
-      }, 1000);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [messages]);
-
   return (
-  <div className="App">
-    <header className="App-header">
-      My third React page
-      <MessagesList messages={messages} />
-      <Form addMessage={addMessage} />
-
+    <>
+    <header style={myStyle}>
+      <h1>My fouth React page</h1>
+      {/* 
+      <ul>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/chats">Chats</Link>
+      </li> 
+      <li>
+        <Link to="/profile">Profile</Link>
+      </li>
+      </ul>
+      */}
     </header>
-  </div>
-  );
-};
+    <BrowserRouter>
+      <Routes>
 
-export default App;
+        <Route path="/" element={<Home />}>
+          <Route path="chats" element={<Chats />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+  
+      </Routes>
+    </BrowserRouter>
+    </>
+  );
+}
