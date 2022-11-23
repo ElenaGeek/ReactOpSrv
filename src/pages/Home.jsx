@@ -1,10 +1,10 @@
-import { Outlet} from "react-router-dom";
+import { Form } from '../components/Form';
 
 const Home = () => {
   return (
     <>
-    <h1>Home Page</h1>;
-    <Outlet />
+    <h1>Home Page</h1>
+    <Form />
     </>
   )
 };
