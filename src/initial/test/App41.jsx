@@ -2,8 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Chats from "./pages/Chats";
 import Topics from "./pages/Topics";
-//import Profile from "./pages/Profile";
-import Profile from "./store/profile/profile";
+import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
 import News from "./pages/News";
 
@@ -20,10 +19,9 @@ export default function App() {
   };
   return (
     <div className="app">
-    <h1>My 5th React page</h1>  
-
       <BrowserRouter>
       <header style={myStyle}>
+      <h1>My fouth React page</h1>  
         <nav>
           <ul>
           <li><Link to="/">Home</Link></li>
@@ -66,7 +64,6 @@ export default function App() {
           <Route path="/" />
         </Routes>
       </BrowserRouter>
-  
     </div>
   );
 }
