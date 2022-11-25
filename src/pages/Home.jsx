@@ -1,12 +1,11 @@
-import { Form } from '../components/Form';
+import React from 'react'
+import logo from '../logo.svg';
 
-const Home = () => {
+export default function Home() {
   return (
-    <>
-    <h1>Home Page</h1>
-    <Form />
-    </>
+    <div>
+      <h1>Home</h1>
+      <img src={logo} className="App-logo" alt="logo" />
+    </div>
   )
-};
-
-export default Home;
+}

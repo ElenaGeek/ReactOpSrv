@@ -1,16 +1,21 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import Chats from "./pages/Chats";
-import Topics from "./pages/Topics";
-//import Profile from "./pages/Profile";
-import Profile from "./store/profile/profile";
-import NoPage from "./pages/NoPage";
-import News from "./pages/News";
+import React, { useEffect } from 'react';
+import { Routes, Route } from "react-router-dom";
+//import { useDispatch } from 'react-redux'
+import './App.css';
+// import './style.scss'
+// import axios from 'axios';
+
+import NavBar from './pages/NavBar'
+import Home from './pages/Home'
+import Post from './pages/Post'
+import Info from './pages/Info'
+import Cards from './pages/Cards'
 
 import './index.css'
 import './App.css';
 
 export default function App() {
+  //const dispatch = useDispatch();
   const myStyle = {
     color: "white",
     backgroundColor: "DodgerBlue",
@@ -18,55 +23,35 @@ export default function App() {
     margin: "5px",
     fontFamily: "Sans-Serif"
   };
+  useEffect(() => {
+    // axios.get('http://localhost:3001/posts')
+    //   .then((postFromServer) => {
+    //     console.log(postFromServer)
+    //     if (postFromServer.data.allPosts.length) {
+    //       dispatch(postActions.setAllPosts(postFromServer.data.allPosts))
+    //     }
+    //   })
+  }, [])
+
+  console.log('App');
+
   return (
     <div className="app">
-    <h1>My 5th React page</h1>  
 
-      <BrowserRouter>
+    <h1>My 6th React page</h1>  
       <header style={myStyle}>
-        <nav>
-          <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/chats/chat1">Chats</Link></li>
-          <li><Link to="/topics">Topics</Link></li>
-          <li><Link to="/profile">Profile</Link></li><br></br>
-          <Link to="/route-a">NewsA     </Link>
-          <Link to="/route-b">NewsB     </Link>
-          <Link to="/route-a/1">RouteToNewsA1    </Link>
-          <Link to="/route-a/2">RouteToNewsA2    </Link>
-          <Link to="/route-b/1">RouteToNewsB1    </Link>
-          <Link to="/route-b/2">RouteToNewsB2    </Link>
-          </ul>
-        </nav>
-        </header>
+        <NavBar />
+      </header>
+      <section className="list App-content">
         <Routes>
-          <Route
-            path="/route-b"
-            element={<News title="News B" />}
-          />
-          <Route
-            path="/route-a"
-            element={<News title="News A" />}
-          />
-          <Route
-            path="/route-b/:id"
-            element={<News title="Id" />}
-          />
-          <Route
-            path="/route-a/:id"
-            element={<News title="Route" />}
-          />
-          <Route path="/" element={<Home />} /> 
-          <Route path="profile" element={<Profile />} />
-          <Route path="chats">
-              <Route path=":chatId" element={<Chats />} />
-          </Route> 
-          <Route path="topics/:id" element={<Topics/>} />
-          <Route path="*" element={<NoPage />} />
-          <Route path="/" />
+          <Route path="/" element={<Home />} />
+          <Route path="form" element={<Post />} />
+          <Route path="posts">
+            <Route path="list" element={<Cards />} />
+            <Route path=":myId" element={<Info />} />
+          </Route>
         </Routes>
-      </BrowserRouter>
-  
+      </section>
     </div>
   );
 }
