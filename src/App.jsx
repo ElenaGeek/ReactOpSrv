@@ -15,7 +15,7 @@ import './index.css'
 import './App.css';
 
 export default function App() {
-  //const dispatch = useDispatch();
+ // const dispatch = useDispatch();
   const myStyle = {
     color: "white",
     backgroundColor: "DodgerBlue",
@@ -33,12 +33,12 @@ export default function App() {
     //   })
   }, [])
 
-  console.log('App');
+  //console.log('App');
 
   return (
     <div className="app">
 
-    <h1>My 6th React page</h1>  
+    <h1>My 7th React page</h1>  
       <header style={myStyle}>
         <NavBar />
       </header>

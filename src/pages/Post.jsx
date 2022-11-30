@@ -9,7 +9,7 @@ import Form from '../components/Form/Form'
 export default function Post() {
 
   const inputs = useSelector(store => store.postInputs)
-  console.log(inputs)
+  //console.log(inputs)
   const dispatch = useDispatch()
 
   const handlerForm = (event) => {
