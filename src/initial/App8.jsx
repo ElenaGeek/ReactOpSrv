@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
-//import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './App.css';
 // import './style.scss'
 // import axios from 'axios';
@@ -10,12 +10,15 @@ import Home from './pages/Home'
 import Post from './pages/Post'
 import Info from './pages/Info'
 import Cards from './pages/Cards'
+import Articles from './pages/Articles'
+//import Signin from './pages/Signin'
+//import Signup from './pages/Signup'
 
 import './index.css'
 import './App.css';
 
 export default function App() {
- // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const myStyle = {
     color: "white",
     backgroundColor: "DodgerBlue",
@@ -38,7 +41,7 @@ export default function App() {
   return (
     <div className="app">
 
-    <h1>My 7th React page</h1>  
+    <h1>My 8th React page</h1>  
       <header style={myStyle}>
         <NavBar />
       </header>
@@ -49,9 +52,11 @@ export default function App() {
           <Route path="posts">
             <Route path="list" element={<Cards />} />
             <Route path=":myId" element={<Info />} />
+            <Route path="articles" element={<Articles />} />
           </Route>
         </Routes>
       </section>
     </div>
   );
 }
+

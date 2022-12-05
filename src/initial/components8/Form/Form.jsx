@@ -1,7 +1,9 @@
 import React from 'react'
 
+import Button from '../Button/Button'
+
 export default function Form({handlerForm, handleInputs, inputs}) {
-  console.log('Form')
+  //console.log('Form')
   return (
     <div>
       <form onSubmit={handlerForm}>
@@ -44,7 +46,14 @@ export default function Form({handlerForm, handleInputs, inputs}) {
               Check me out
           </label>
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+
+        <Button
+        type="submit"
+        className="btn btn-primary"
+        >
+        Submit
+      </Button>
+{/*        <button type="submit" className="btn btn-primary">Submit</button>*/}
       </form>
 
     </div>
