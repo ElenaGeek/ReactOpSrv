@@ -1,5 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { set, push, remove } from "firebase/database"
+import { postsRef } from '../../services/firebase'
+
 import * as postActions from '../../redux/actions/postAC'
 
 import Form from '../../components/Form/Form'
@@ -11,7 +14,10 @@ export default function Post() {
 
   const handlerForm = (event) => {
     event.preventDefault()
-    dispatch(postActions.submitPost(inputs))
+    push(postsRef, {
+      ...inputs
+    })
+  //  dispatch(postActions.submitPost(inputs))
     dispatch(postActions.clearInputPost())
   }
 
