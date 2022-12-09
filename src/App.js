@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
-//import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { firebaseAuth } from './services/firebase'
+
 import './App.css';
 // import './style.scss'
 //import axios from 'axios';
 
 //import * as postActions from './redux/actions/postAC'
+import * as aprofileActions from './redux/actions/profileAC'
 
 import Navbar from './components/Navbar/Navbar'
 import PageHome from './pages/Home/PageHome'
@@ -17,18 +20,22 @@ import Articles from './pages/Articles/PageArticles'
 import Signin from './pages/Signin/PageSignin'
 import Signup from './pages/Signup/PageSignup'
 
+import { PrivateRoutes } from './components/routes/PrivateRoutes'
+
 function App () {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    // axios.get('http://localhost:3001/posts')
-    //   .then((postFromServer) => {
-    //     console.log(postFromServer)
-    //     if (postFromServer.data.allPosts.length) {
-    //       dispatch(postActions.setAllPosts(postFromServer.data.allPosts))
-    //     }
-    //   })
-  }, [])
+    const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
+      if (user) {
+        dispatch(aprofileActions.auth(true))
+      } else {
+        dispatch(aprofileActions.auth(false))
+      }
+    })
+
+    return unsubscribe
+  }, [dispatch])
 
   console.log('App');
 

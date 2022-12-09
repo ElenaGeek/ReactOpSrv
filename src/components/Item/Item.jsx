@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import { useDispatch } from 'react-redux'
+import { set, push, remove } from "firebase/database"
+
+import {  getPostById } from '../../services/firebase'
 import axios from 'axios'
 
 import * as postActions from '../../redux/actions/postAC'
@@ -8,15 +11,17 @@ import * as postActions from '../../redux/actions/postAC'
 export default function Item({item}) {
   console.log('Item')
   const dispatch = useDispatch();
-  const handlerDelete = (myId) => {
-    axios.post('http://localhost:3001/delete', { myId })
-      .then(data => console.log(data))
-    dispatch(postActions.removePost({myId}))
+  const handlerDelete = (id) => {
+    console.log('id', id)
+    remove(getPostById(id))
+  //  axios.post('http://localhost:3001/delete', { myId })
+  //    .then(data => console.log(data))
+  //  dispatch(postActions.removePost({myId}))
   }
 
   const addLike = (myId) => {
-    axios.patch('http://localhost:3001/posts', { myId })
-      .then(data => console.log('data LIKE', data))
+  //  axios.patch('http://localhost:3001/posts', { myId })
+  //    .then(data => console.log('data LIKE', data))
       dispatch(postActions.addLikePost({myId}))
   }
 
@@ -34,8 +39,8 @@ export default function Item({item}) {
           <p className="card-text">{item.text ?? 'Some quick example'}</p>
           <div className="btn-group">
             <Link to={`/posts/${item.myId}`} className="btn btn-info">Detail</Link>
-            <button onClick={() => addLike(item.myId)} className="btn btn-success">Like {item.likes}</button>
-            <button onClick={() => handlerDelete(item.myId)} className="btn btn-danger">Delete</button>
+            <button onClick={() => addLike(item.id)} className="btn btn-success">Like {item.likes}</button>
+            <button onClick={() => handlerDelete(item.id)} className="btn btn-danger">Delete</button>
           </div>
         </div>
       </div>
