@@ -41,7 +41,7 @@ function App () {
 
   return (
     <div className="App">
-      <h1>My 8th React page</h1>  
+      <h1>My 10th React page</h1>  
       <header className="App-header">
         <Navbar />
       </header>
