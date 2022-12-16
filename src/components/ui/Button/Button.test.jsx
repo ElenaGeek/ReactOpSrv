@@ -15,7 +15,6 @@ describe('Button', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  
   it('render component with text name button', () => {
     render(<Buttom>Change name</Buttom>)
     expect(screen.getByText(/Change name/)).toBeInTheDocument()
